@@ -95,5 +95,24 @@ public class MessageDAO {
         }
         return messageToDelete;
     }
+    public Message updateMessageTextById(String message_text, int id){
+        try {
+            Connection connection = ConnectionUtil.getConnection();
+            String sql = "UPDATE message SET message_text = ? WHERE message_id = ?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, message_text);
+            preparedStatement.setInt(2, id);
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0){
+                return getMessageById(id);
+            }
+            else{
+                return null;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
     
 }

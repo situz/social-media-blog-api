@@ -85,11 +85,11 @@ public class SocialMediaController {
             ctx.status(400);
         }
     }
-    private void getAllMessagesHandler(Context ctx) throws JsonProcessingException{
+    private void getAllMessagesHandler(Context ctx){
         List<Message> messages = messageService.getAllMessages();
         ctx.status(200).json(messages);
     }
-    private void getMessageByIdHandler(Context ctx) throws JsonProcessingException{
+    private void getMessageByIdHandler(Context ctx){
         int id = Integer.parseInt(ctx.pathParam("message_id"));
         Message message = messageService.getMessageById(id);
         if (message != null){
@@ -99,7 +99,7 @@ public class SocialMediaController {
             ctx.status(200).result("");
         }
     }
-    private void deleteMessageByIdHandler(Context ctx) throws JsonProcessingException{
+    private void deleteMessageByIdHandler(Context ctx){
         int id = Integer.parseInt(ctx.pathParam("message_id"));
         Message deleted_message = messageService.deleteMessageById(id);
         if (deleted_message != null){
