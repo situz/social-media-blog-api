@@ -19,7 +19,11 @@ public class AccountDAO {
             preparedStatement.setString(2, account.getPassword());
 
             preparedStatement.executeUpdate();
-            return account;
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()){
+                int generated_account_id = (int) rs.getLong(1);
+                return new Account(generated_account_id, account.getUsername(), account.getPassword());
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
