@@ -80,7 +80,7 @@ public class AccountDAO {
         return null;
     }
 
-    public Account getAccountByID(int id){
+    public Account getAccountById(int id){
         try {
             Connection connection = ConnectionUtil.getConnection();
             String sql = "SELECT * FROM account WHERE account_id = ?;";
