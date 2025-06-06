@@ -87,6 +87,6 @@ public class SocialMediaController {
         List<Message> messages = messageService.getAllMessages();
         ctx.status(200).json(messages);
     }
-
+    
 
 }
