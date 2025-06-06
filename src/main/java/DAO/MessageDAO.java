@@ -66,7 +66,7 @@ public class MessageDAO {
                 Message message = new Message();
                 message.setMessage_id(rs.getInt("message_id"));
                 message.setPosted_by(rs.getInt("posted_by"));
-                message.setMessage_text(rs.getString("message text"));
+                message.setMessage_text(rs.getString("message_text"));
                 message.setTime_posted_epoch(rs.getLong("time_posted_epoch"));
                 return message;
             }
