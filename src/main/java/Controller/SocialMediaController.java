@@ -38,8 +38,9 @@ public class SocialMediaController {
         app.post("/register", this::registerHandler);
         app.post("/login", this::loginHandler);
         app.post("/messages", this::postMessageHandler);
-        app.get("/messages",this::getAllMessagesHandler);
-        app.get("/messages/{message_id}",this::getMessageByIdHandler);
+        app.get("/messages", this::getAllMessagesHandler);
+        app.get("/messages/{message_id}", this::getMessageByIdHandler);
+        app.delete("/messages/{message_id}", this::deleteMessageByIdHandler);
 
         return app;
     }
@@ -93,6 +94,16 @@ public class SocialMediaController {
         Message message = messageService.getMessageById(id);
         if (message != null){
             ctx.status(200).json(message);
+        }
+        else{
+            ctx.status(200).result("");
+        }
+    }
+    private void deleteMessageByIdHandler(Context ctx) throws JsonProcessingException{
+        int id = Integer.parseInt(ctx.pathParam("message_id"));
+        Message deleted_message = messageService.deleteMessageById(id);
+        if (deleted_message != null){
+            ctx.status(200).json(deleted_message);
         }
         else{
             ctx.status(200).result("");
