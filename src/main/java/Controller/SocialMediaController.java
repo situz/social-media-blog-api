@@ -17,6 +17,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class SocialMediaController {
     AccountService accountService;
+
+    public SocialMediaController(){
+        this.accountService = new AccountService();
+    }
     /**
      * In order for the test cases to work, you will need to write the endpoints in the startAPI() method, as the test
      * suite must receive a Javalin object from this method.
@@ -26,7 +30,7 @@ public class SocialMediaController {
         Javalin app = Javalin.create();
         app.get("example-endpoint", this::exampleHandler);
         
-        app.post("register", this::registerHandler);
+        app.post("/register", this::registerHandler);
 
         return app;
     }
@@ -43,7 +47,7 @@ public class SocialMediaController {
         Account account = mapper.readValue(ctx.body(), Account.class);
         Account addedAccount = accountService.register(account);
         if (addedAccount != null){
-            ctx.json(mapper.writeValueAsString(addedAccount));
+            ctx.status(200).json(mapper.writeValueAsString(addedAccount));
         }
         else{
             ctx.status(400);
